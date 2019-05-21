@@ -1,0 +1,7 @@
+@import "../../styles/variables";
+
+.UserForm {
+  display: grid;
+  grid-template: 1fr / 1fr 100px;
+  padding: 0 10px;
+}

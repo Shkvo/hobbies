@@ -1,0 +1,16 @@
+@import "../../styles/variables";
+
+.User {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  margin-top: 5px;
+  color: $dark-gray;
+  background: $white;
+  cursor: pointer;
+
+  &:first-of-type {
+    margin: 0;
+  }
+}

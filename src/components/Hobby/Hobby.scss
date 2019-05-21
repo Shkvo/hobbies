@@ -1,0 +1,27 @@
+@import "../../styles/variables";
+
+.Hobby {
+  display: grid;
+  grid-template: 1fr / 1fr 1fr 1fr 50px;
+  align-items: center;
+  height: 50px;
+  padding: 0 20px;
+  margin-top: 5px;
+  color: $dark-gray;
+  background: $white;
+  cursor: pointer;
+
+  &:first-of-type {
+    margin: 0;
+  }
+
+  &-item {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  &-deleteButton {
+    color: $red;
+  }
+}

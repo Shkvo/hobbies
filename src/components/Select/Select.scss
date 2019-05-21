@@ -1,0 +1,33 @@
+@import "../../styles/variables";
+
+.Select {
+  position: relative;
+
+  &::after {
+    content: '▶';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    color: $medium-gray;
+    transform: rotate(90deg) translateX(-50%);
+  }
+
+  select {
+    height: 100%;
+    width: 100%;
+    padding: 0 2.5%;
+    outline: none;
+    border: none;
+    border-right: 1px solid $medium-gray;
+    border-radius: 0px;
+    background: $white;
+    font-size: $input-font-size;
+    transition: .15s ease-in-out all;
+    appearance: none;
+    cursor: pointer;
+
+    &:hover, &:focus {
+      filter: drop-shadow(0px 2px 5px $dark-gray)
+    }
+  }
+}
