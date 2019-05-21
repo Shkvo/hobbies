@@ -1,41 +1,28 @@
+import { User, Action } from '../../types';
 import { CREATE_USER, CREATE_HOBBY, DELETE_HOBBY } from '../types';
-import { getLastItem } from '../../helpers/getLastItem';
 
-let lastId: number;
-
-export default (state: any = [], action: any) => {
+export default (state: User[] = [], action: Action) => {
   switch (action.type) {
     case CREATE_USER:
-      lastId = getLastItem(state, 'id');
-
-      return [...state, {
-        id: ++lastId,
-        name: action.data,
-        hobbies: [],
-      }];
+      return [...state, action.data];
 
     case CREATE_HOBBY:
-      return state.map((item: any) => {
+      return state.map(item => {
         if (item.id === action.data.id) {
-          lastId = getLastItem(item.hobbies, 'id');
-
           return {
             ...item,
-            hobbies: [...item.hobbies, {
-              id: ++lastId,
-              ...action.data.hobby
-            }]
+            hobbies: [...item.hobbies, action.data.hobby]
           }
         }
         return item;
-      })
+      });
 
     case DELETE_HOBBY:
-      return state.map((item: any) => {
+      return state.map(item => {
         if (item.id === action.data.userId) {
           return {
             ...item,
-            hobbies: item.hobbies.filter((hobby: any) => hobby.id !== action.data.hobbyId)
+            hobbies: item.hobbies.filter(hobby => hobby.id !== action.data.hobbyId)
           };
         }
         return item;

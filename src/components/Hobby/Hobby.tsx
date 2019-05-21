@@ -2,25 +2,21 @@ import React, { FunctionComponent, useCallback } from 'react';
 import { cn } from '@bem-react/classname';
 import { connect } from 'react-redux';
 import * as userActions from '../../redux/actions/user';
+import { Hobby as HobbyType, State } from '../../types';
 import './Hobby.scss';
 
 const cnHobby = cn('Hobby');
 
 type HobbyProps = {
+  data: HobbyType;
   currentUserId: number;
-  data: {
-    id: number;
-    passion: number;
-    hobby: string;
-    year: number;
-  };
   deleteHobby: (hobbyId: number, userId: number) => void;
 };
 
 const Hobby: FunctionComponent<HobbyProps> = ({ data, deleteHobby, currentUserId }) => {
   const handleDeleteHobby = useCallback(() => {
     deleteHobby(data.id, currentUserId);
-  }, [deleteHobby, data, currentUserId]);
+  }, [data, deleteHobby, currentUserId]);
 
   return (
     <div
@@ -46,7 +42,7 @@ const Hobby: FunctionComponent<HobbyProps> = ({ data, deleteHobby, currentUserId
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: State) => ({
   currentUserId: state.user.id
 });
 

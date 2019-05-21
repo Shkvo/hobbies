@@ -1,11 +1,12 @@
-import { CREATE_HOBBY, DELETE_HOBBY, SELECT_USER } from './../types';
+import { User, Hobby } from '../../types';
+import { CREATE_HOBBY, DELETE_HOBBY, SELECT_USER } from '../types';
 
-export const selectUser = (data: any) => ({
+export const selectUser = (data: User) => ({
   type: SELECT_USER,
   data
 });
 
-export const createHobby = (id: number, hobby: any) => ({
+export const createHobby = (id: number, hobby: Hobby) => ({
   type: CREATE_HOBBY,
   data: { hobby, id }
 });

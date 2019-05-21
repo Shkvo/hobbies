@@ -1,4 +1,4 @@
-import React, { useState, useCallback, ChangeEvent } from 'react';
+import React, { useState, useCallback, ChangeEvent, FunctionComponent } from 'react';
 import { cn } from '@bem-react/classname';
 import { connect } from 'react-redux';
 import Input from '../Input';
@@ -6,11 +6,18 @@ import Button from '../Button';
 import Select from '../Select';
 import { options } from '../../helpers/constants';
 import * as userActions from '../../redux/actions/user';
+import { Hobby, State, User } from '../../types';
 import './HobbyForm.scss';
+import { getLastItem } from '../../helpers/getLastItem';
 
 const cnHobbyForm = cn('HobbyForm');
 
-const HobbyForm = ({ createHobby, currentUserId }: any) => {
+type HobbyFormProps = {
+  user: User;
+  createHobby: (userId: number, hobby: Hobby) => void;
+};
+
+const HobbyForm: FunctionComponent<HobbyFormProps> = ({ createHobby, user }) => {
   const [passion, setPassion] = useState('Low');
   const [hobby, setHobby] = useState('');
   const [year, setYear] = useState('');
@@ -28,17 +35,20 @@ const HobbyForm = ({ createHobby, currentUserId }: any) => {
   }, []);
 
   const handleAddHobby = useCallback(() => {
+    let lastId = getLastItem(user.hobbies, 'id');
+
     const record = {
+      id: ++lastId,
       hobby,
       passion,
       year
     };
 
-    createHobby(currentUserId, record);
+    createHobby(user.id, record);
     setPassion('Low');
     setHobby('');
     setYear('');
-  }, [hobby, passion, year, createHobby, currentUserId]);
+  }, [hobby, passion, year, user, createHobby]);
 
   return (
     <div className={cnHobbyForm()}>
@@ -65,8 +75,8 @@ const HobbyForm = ({ createHobby, currentUserId }: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  currentUserId: state.user.id
+const mapStateToProps = (state: State) => ({
+  user: state.user
 });
 
 const mapDispatchToProps = {

@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { cn } from '@bem-react/classname';
 import { connect } from 'react-redux';
 import UserForm from '../UserForm';
 import List from '../List';
 import User from '../User';
+import { User as UserType, State } from '../../types';
 import './LeftSide.scss';
 
 const cnLeftSide = cn('LeftSide');
 
-const LeftSide = ({ users }: any) => {
+type LeftSideProps = {
+  users: UserType[];
+};
+
+const LeftSide: FunctionComponent<LeftSideProps> = ({ users }) => {
   return (
     <div className={cnLeftSide()}>
       <UserForm />
@@ -18,9 +23,9 @@ const LeftSide = ({ users }: any) => {
       />
     </div>
   );
-}
+};
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: State) => ({
   users: state.users || []
 });
 

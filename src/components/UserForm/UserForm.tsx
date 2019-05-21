@@ -1,14 +1,21 @@
-import React, { useState, useCallback, ChangeEvent } from 'react';
+import React, { useState, useCallback, ChangeEvent, FunctionComponent } from 'react';
 import { cn } from '@bem-react/classname';
 import { connect } from 'react-redux';
 import * as usersActions from '../../redux/actions/users';
 import Input from '../Input';
 import Button from '../Button';
+import { getLastItem } from '../../helpers/getLastItem';
+import { User, State } from '../../types';
 import './UserForm.scss';
 
 const cnUserForm = cn('UserForm');
 
-const UserForm = ({ createUser }: any) => {
+type UserFormProps = {
+  users: User[];
+  createUser: (data: User) => void;
+};
+
+const UserForm: FunctionComponent<UserFormProps> = ({ createUser, users }) => {
   const [name, setName] = useState('');
 
   const handleNameChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -16,9 +23,16 @@ const UserForm = ({ createUser }: any) => {
   }, []);
 
   const handleAddUser = useCallback(() => {
-    createUser(name);
+    let lastId = getLastItem(users, 'id');
+
+    const user = {
+      id: ++lastId,
+      hobbies: [],
+      name,
+    };
+    createUser(user);
     setName('');
-  }, [createUser, name]);
+  }, [createUser, name, users]);
 
   return (
     <div className={cnUserForm()}>
@@ -35,11 +49,15 @@ const UserForm = ({ createUser }: any) => {
   );
 };
 
+const mapStateToProps = (state: State) => ({
+  users: state.users
+});
+
 const mapDispatchToProps =  {
   createUser: usersActions.createUser
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(UserForm);

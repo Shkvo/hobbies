@@ -1,6 +1,7 @@
-import { CREATE_USER } from './../types';
+import { User } from './../../types';
+import { CREATE_USER } from '../types';
 
-export const createUser = (data: any) => ({
+export const createUser = (data: User) => ({
   type: CREATE_USER,
   data
 });
