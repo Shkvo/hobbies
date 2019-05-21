@@ -3,7 +3,6 @@
 .RightSide {
   display: grid;
   grid-template: 40px 1fr / 1fr;
-  width: 100%;
-  height: 100%;
+  padding-top: 10px;
   background: $light-gray;
 }

@@ -6,10 +6,7 @@ const cnSelect = cn('Select');
 
 type SelectProps = {
   value: string;
-  options: {
-    value: number;
-    caption: string;
-  }[];
+  options: string[];
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
@@ -21,10 +18,10 @@ const Select: FunctionComponent<SelectProps> = ({ value, onChange, options }) =>
     >
     {options.map(item => (
       <option
-        key={item.value}
-        value={item.value}
+        key={item}
+        value={item}
       >
-        {item.caption}
+        {item}
       </option>
     ))}
   </select>

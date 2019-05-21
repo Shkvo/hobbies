@@ -1,5 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { cn } from '@bem-react/classname';
+import { connect } from 'react-redux';
+import * as userActions from '../../redux/actions/user';
 import './User.scss';
 
 const cnUser = cn('User');
@@ -9,14 +11,18 @@ type UserProps = {
     id: number;
     name: string;
   };
-  onClick?: () => void;
+  selectUser: (data: any) => void;
 };
 
-const User: FunctionComponent<UserProps> = ({ data, onClick }) => {
+const User: FunctionComponent<UserProps> = ({ data, selectUser }) => {
+  const handleSelectUser = useCallback(() => {
+    selectUser(data);
+  }, [selectUser, data])
+
   return (
     <div
       key={data.id}
-      onClick={onClick}
+      onClick={handleSelectUser}
       className={cnUser()}
     >
       {data.name}
@@ -24,4 +30,11 @@ const User: FunctionComponent<UserProps> = ({ data, onClick }) => {
   );
 }
 
-export default User;
+const mapDispatchToProps = {
+  selectUser: userActions.selectUser
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(User);
