@@ -5,4 +5,9 @@
   grid-template: 40px 1fr / 1fr;
   padding-top: 10px;
   background: $light-gray;
+
+  @media screen and (max-width: 1200px) {
+    grid-template: auto 1fr / 1fr;
+    height: 100%;
+  }
 }

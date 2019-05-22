@@ -1,6 +1,14 @@
+@import "../../styles/variables";
+
 .App {
   display: grid;
   grid-template: 64px 1fr / 1fr 2fr;
   height: 100vh;
   width: 100vw;
+  background: $light-gray;
+
+  @media screen and (max-width: 1200px) {
+    grid-template: 64px auto auto / 1fr;
+    grid-auto-flow: column;
+  }
 }

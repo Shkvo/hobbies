@@ -1,5 +1,19 @@
+@import "../../styles/variables";
+
 .HobbyForm {
   display: grid;
   grid-template: 1fr / 1fr 1fr 1fr 100px;
   padding: 0 10px;
+
+
+  @media screen and (max-width: 1200px) {
+    grid-template: 1fr / 1fr;
+    grid-gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $white;
+
+    div, input, button {
+      height: 40px;
+    }
+  }
 }

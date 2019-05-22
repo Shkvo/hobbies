@@ -4,7 +4,8 @@
   display: grid;
   grid-template: 1fr / 1fr 1fr 1fr 50px;
   align-items: center;
-  height: 50px;
+  height: auto;
+  min-height: 50px;
   padding: 0 20px;
   margin-top: 5px;
   color: $dark-gray;
@@ -19,9 +20,21 @@
     display: flex;
     width: 100%;
     justify-content: center;
+    overflow: hidden;
+    text-align: center;
   }
 
   &-deleteButton {
     color: $red;
+
+    @media screen and (max-width: 1200px) {
+        margin-top: 10px;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
   }
 }
